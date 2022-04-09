@@ -30,11 +30,12 @@ class prng(object):
         """
         def aux():
             x = x0
+            bitmask = 0xFFFFFFFF
             for _ in range(n):
                 yield x
-                alpha0 = x ^ (x << a)
-                alpha1 = alpha0 ^ (alpha0 >> b)
-                x = alpha1 ^ (alpha1 << c)
+                alpha0 = x ^ ((x << a) & bitmask)
+                alpha1 = alpha0 ^ ((alpha0 >> b) & bitmask)
+                x = alpha1 ^ ((alpha1 << c) & bitmask)
 
         return aux
 
@@ -44,8 +45,12 @@ class prng(object):
         returns a mersenne twister generator (the python generator) to generate n random numbers
         given the seed x0 which defaults to 1.
         """
-        ### your code here
-        pass
+        def aux():
+            random.seed(x0)
+            for _ in range(n):
+                yield random.randint(start, stop)
+        
+        return aux
 
     @staticmethod
     def __get_byte(i, byte_index):
