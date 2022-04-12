@@ -2,7 +2,7 @@ from PIL import Image
 import numpy as np
 import matplotlib.colors as col
 import random
-import scipy.stats
+from scipy.stats import chisquare
 
 
 class prng(object):
@@ -14,6 +14,7 @@ class prng(object):
         returns an lcg generator that generates n random numbers with linear congruential generator
         given a, b, m, n, and x0 (i.e., seed).
         """
+
         def aux():
             x = x0
             for _ in range(n):
@@ -28,13 +29,15 @@ class prng(object):
         returns a xorshift generator that generates n random numbers with xorshift
         given a, b, c, n, and x0 (i.e., seed).
         """
+
         def aux():
             x = x0
+            bitmask = 0xFFFFFFFF
             for _ in range(n):
+                alpha0 = x ^ ((x << a) & bitmask)
+                alpha1 = alpha0 ^ ((alpha0 >> b) & bitmask)
+                x = alpha1 ^ ((alpha1 << c) & bitmask)
                 yield x
-                alpha0 = x ^ (x << a)
-                alpha1 = alpha0 ^ (alpha0 >> b)
-                x = alpha1 ^ (alpha1 << c)
 
         return aux
 
@@ -44,8 +47,13 @@ class prng(object):
         returns a mersenne twister generator (the python generator) to generate n random numbers
         given the seed x0 which defaults to 1.
         """
-        ### your code here
-        pass
+
+        def aux():
+            random.seed(x0)
+            for _ in range(n):
+                yield random.randint(start, stop)
+
+        return aux
 
     @staticmethod
     def __get_byte(i, byte_index):
@@ -84,13 +92,49 @@ class prng(object):
 
     @staticmethod
     def gen_xorshift_data(a, b, c, n, seed=1, option=1):
-        ### your code here
-        pass
+        xorshiftg = prng.xorshift(a, b, c, n, x0=seed)()
+
+        ### option 1) generate n xorshift numbers.
+        if option == 1:
+            return np.array([next(xorshiftg) for _ in range(n)])
+
+        ### option 2) generate n xorshift numbers by
+        ### varying the seed from i upto n-1.
+        elif option == 2:
+            data = np.zeros(n)
+            for i in range(n):
+                data[i] = next(prng.xorshift(a, b, c, 1, x0=i)())
+            return data
+
+        ### option 3) generate n numbers with numpy arange.
+        elif option == 3:
+            return np.arange(n)
+
+        else:
+            raise Exception("prng.get_xorshift_data(): option must be 1,2,3")
 
     @staticmethod
     def gen_mersenne_twister_data(n, seed=1, start=0, stop=1000, option=1):
-        ### your code here
-        pass
+        mersenneg = prng.mersenne_twister(n, x0=seed, start=start, stop=stop)()
+
+        ### option 1) generate n mersenne twister numbers.
+        if option == 1:
+            return np.array([next(mersenneg) for _ in range(n)])
+
+        ### option 2) generate n mersenne twister numbers by
+        ### varying the seed from i upto n-1.
+        elif option == 2:
+            data = np.zeros(n)
+            for i in range(n):
+                data[i] = next(prng.mersenne_twister(1, x0=i, start=start, stop=stop)())
+            return data
+
+        ### option 3) generate n numbers with numpy arange.
+        elif option == 3:
+            return np.arange(n)
+
+        else:
+            raise Exception("prng.gen_mersenne_twister_data(): option must be 1,2,3")
 
     @staticmethod
     def gen_pil_image(data, w, h, n, name="tmp", save_flag=True):
@@ -116,5 +160,12 @@ class prng(object):
 
     @staticmethod
     def equidistrib_test(seq, n, lower_bound, upper_bound):
-        ### your code here
-        pass
+        # Inclusive bounds
+        d = upper_bound - lower_bound + 1
+        p = 1 / d
+
+        N = [0] * d
+        for y in seq:
+            N[y - lower_bound] += 1
+
+        return chisquare(N, f_exp=[p * n] * d)

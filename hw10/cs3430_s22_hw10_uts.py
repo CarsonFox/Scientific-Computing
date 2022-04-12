@@ -77,8 +77,6 @@ class cs3430_s22_hw10_uts(unittest.TestCase):
             print("all random numbers are unique")
         print("CS 3430: S22: HW10: Problem 01: Unit Test 04: pass...")
 
-    """
-
     def test_hw10_prob01_ut05(self):
         print("\n***** CS3430: S22: HW10: Problem 01: Unit Test 05 ************")
         a, b, m, n, seed = 214013, 2531011, 4294967296, 10000000, 11235
@@ -155,8 +153,6 @@ class cs3430_s22_hw10_uts(unittest.TestCase):
         if self.__check_uniqueness(rns):
             print("all random numbers are unique")
         print("CS 3430: S22: HW10: Problem 01: Unit Test 09: pass...")
-
-    """
 
     def test_hw10_prob01_ut10(self):
         print("\n***** CS3430: S22: HW10: Problem 01: Unit Test 10 ************")
@@ -267,8 +263,6 @@ class cs3430_s22_hw10_uts(unittest.TestCase):
         assert self.__check_uniqueness(rns)
         print("CS 3430: S22: HW10: Problem 01: Unit Test 19: pass...")
 
-    """
-
     def test_hw10_prob01_ut20(self):
         print("\n***** CS3430: S22: HW10: Problem 01: Unit Test 20 ************")
         seed, start, stop, n = 1, 0, 1000, 5
@@ -291,9 +285,9 @@ class cs3430_s22_hw10_uts(unittest.TestCase):
             print("all random numbers are unique...")
         print("CS 3430: S22: HW10: Problem 01: Unit Test 21: pass...")
 
-    ### ================ Problem 2: Unit Tests: Random Image Art =====================
+    # ================ Problem 2: Unit Tests: Random Image Art =====================
 
-    ### this UT should generate the left image on slide 10 in Lecture 20.
+    # this UT should generate the left image on slide 10 in Lecture 20.
     def test_hw10_prob02_ut01(self):
         print("\n***** CS3430: S22: HW10: Problem 02: Unit Test 01 ************")
         w, h = 600, 600
@@ -378,7 +372,7 @@ class cs3430_s22_hw10_uts(unittest.TestCase):
         prng.gen_pil_image(data, w, h, n)
         print("CS 3430: S22: HW10: Problem 02: Unit Test 07: pass...")
 
-    ### this UT generates 1024x1024 image with XORSHIFT seed in [1, 1024^2], a=2,b=5,c=15.
+    ## this UT generates 1024x1024 image with XORSHIFT seed in [1, 1024^2], a=2,b=5,c=15.
     def test_hw10_prob02_ut08(self):
         print("\n***** CS3430: S22: HW10: Problem 02: Unit Test 08 ************")
         w, h = 1024, 1024
@@ -577,7 +571,6 @@ class cs3430_s22_hw10_uts(unittest.TestCase):
         print("V     = {}".format(v_stat))
         print("p val = {}".format(p_val))
         print("CS 3430: S22: HW10: Problem 03: Unit Test 12: pass...")
-    """
 
     def runTest(self):
         pass
