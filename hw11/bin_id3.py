@@ -1,6 +1,8 @@
 import csv
-import math
+from math import log2
 import copy
+
+from attr import attr
 
 ##################################################
 # module: bin_id3.py
@@ -12,18 +14,18 @@ import copy
 
 ### Positive and Negative Constant labels; don't change
 ### these.
-PLUS  = 'Yes'
-MINUS = 'No'
+PLUS = "Yes"
+MINUS = "No"
+
 
 class id3_node(object):
-
     def __init__(self, lbl):
         self.__label = lbl
         self.__children = {}
 
     def set_label(self, lbl):
         self.__label = lbl
-        
+
     def add_child(self, attrib_val, node):
         self.__children[attrib_val] = node
 
@@ -37,8 +39,8 @@ class id3_node(object):
         assert attrib_val in self.__children
         return self.__children[attrib_val]
 
-class bin_id3(object):
 
+class bin_id3(object):
     @staticmethod
     def get_attrib_values(a, kvt):
         """
@@ -63,10 +65,10 @@ class bin_id3(object):
         column names and the values are column attributes.
         """
         examples = []
-        with open(csv_fp) as csv_file:    
-            csv_reader = csv.reader(csv_file, delimiter=',')
+        with open(csv_fp) as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter=",")
             line_count = 0
-            key_names  = None
+            key_names = None
             for row in csv_reader:
                 if len(row) == 0:
                     continue
@@ -108,7 +110,7 @@ class bin_id3(object):
         Finds all examples in such that attrib = val.
         """
         rslt = []
-        #print('Looking for examples where {}={}'.format(attrib, val))
+        # print('Looking for examples where {}={}'.format(attrib, val))
         for ex in examples:
             if attrib in ex:
                 if ex[attrib] == val:
@@ -127,7 +129,7 @@ class bin_id3(object):
             val_counts[av] = len(SV)
         max_cnt = 0
         max_val = None
-        #print('val_counts = {}'.format(val_counts))
+        # print('val_counts = {}'.format(val_counts))
         for val, cnt in val_counts.items():
             if cnt > max_cnt:
                 max_cnt = cnt
@@ -139,39 +141,40 @@ class bin_id3(object):
     def get_non_target_attributes(target_attrib, attribs):
         """
         Returns a comma separated string of all attributes in the list attribs that
-        that are not equal to target_attrib; 
+        that are not equal to target_attrib;
         - target_attrib is a string.
         - attribs is a list of strings.
         """
-        return ', '.join([a for a in attribs if a != target_attrib])
+        return ", ".join([a for a in attribs if a != target_attrib])
 
     @staticmethod
     def display_info_gains(gains):
         """
         Displays a dictionary of information gains in the format attribute: gain.
         """
-        print('Information gains are as follows:')
+        print("Information gains are as follows:")
         for attrib, gain in gains.items():
-            print('\t{}: {}'.format(attrib, gain))
+            print("\t{}: {}".format(attrib, gain))
 
     @staticmethod
     def display_id3_node(node, tabs):
         """
         Displays the subtree rooted at a node.
         """
-        print(tabs + '{}'.format(node.get_label()))
+        print(tabs + "{}".format(node.get_label()))
         children = node.get_children()
         for v, n in children.items():
-            print(tabs + '\t{}'.format(v))
-            bin_id3.display_id3_node(n, tabs+'\t\t')
+            print(tabs + "\t{}".format(v))
+            bin_id3.display_id3_node(n, tabs + "\t\t")
 
     @staticmethod
     def proportion(examples, attrib, val):
         """
         Computes the proportion of examples whose attribute attrib has the value val.
         """
-        ## YOUR CODE HERE
-        pass
+        return len(bin_id3.find_examples_given_attrib_val(examples, attrib, val)) / len(
+            examples
+        )
 
     @staticmethod
     def entropy(examples, attrib, avt):
@@ -179,18 +182,24 @@ class bin_id3(object):
         Computes entropy of examples with respect of attribute attrib.
         avt is the attribute value table computed by construct_attrib_values_from_examples().
         """
-	## YOUR CODE HERE
-        pass
-        
-   
+        proportions = (bin_id3.proportion(examples, attrib, val) for val in avt[attrib])
+        return -sum(p * log2(p) for p in proportions if p != 0)
+
     @staticmethod
     def gain(examples, target_attrib, attrib, avt):
         """
         Computes gain of the attribute attrib in examples.
         """
-        ## YOUR CODE HERE
-        pass
-   
+        entropy = bin_id3.entropy(examples, target_attrib, avt)
+
+        def reduction(val):
+            split = bin_id3.find_examples_given_attrib_val(examples, attrib, val)
+            return (
+                len(split) / len(examples) * bin_id3.entropy(split, target_attrib, avt)
+            )
+
+        return entropy - sum(map(reduction, avt[attrib]))
+
     @staticmethod
     def find_best_attribute(examples, target_attrib, attribs, avt):
         """
@@ -198,9 +207,13 @@ class bin_id3(object):
         This method returns three values: best attribute, its gain, and
         a dictionary that maps each attribute to its gain.
         """
-	## YOUR CODE HERE
-        pass
-        
+        gains = {
+            attrib: bin_id3.gain(examples, target_attrib, attrib, avt)
+            for attrib in attribs
+            if attrib != target_attrib
+        }
+        best_attrib, best_gain = max(gains.items(), key=lambda pair: pair[1])
+        return best_attrib, best_gain, gains
 
     @staticmethod
     def fit(examples, target_attrib, attribs, avt, dbg):
@@ -224,17 +237,59 @@ class bin_id3(object):
         """
         global PLUS
         global MINUS
-        ## YOUR CODE HERE
-        pass
-                   
+
+        posExamples = bin_id3.find_examples_given_attrib_val(
+            examples, target_attrib, PLUS
+        )
+        if len(examples) == 0 or len(posExamples) == len(examples):
+            return id3_node(MINUS)
+
+        negExamples = bin_id3.find_examples_given_attrib_val(
+            examples, target_attrib, MINUS
+        )
+        if len(negExamples) == len(examples):
+            return id3_node(MINUS)
+
+        #Don't count target attribute
+        if len(attribs) == 1:
+            return id3_node(
+                bin_id3.find_most_common_attrib_val(examples, target_attrib, avt)[0]
+            )
+
+        return bin_id3.split_on_best_attrib(examples, target_attrib, attribs, avt, dbg)
+
     @staticmethod
-    def predict(root, example):
+    def split_on_best_attrib(examples, target_attrib, attribs, avt, dbg):
+        best_attrib, _, _ = bin_id3.find_best_attribute(
+            examples, target_attrib, attribs, avt
+        )
+        root = id3_node(best_attrib)
+
+        for val in avt[best_attrib]:
+            split = bin_id3.find_examples_given_attrib_val(examples, best_attrib, val)
+
+            if len(split) == 0:
+                child = id3_node(
+                    bin_id3.find_most_common_attrib_val(split, target_attrib, avt)[0]
+                )
+            else:
+                child = bin_id3.fit(
+                    split, target_attrib, attribs - {best_attrib}, avt, dbg
+                )
+            root.add_child(val, child)
+
+        return root
+
+    @staticmethod
+    def predict(root: id3_node, example):
         """
         Classifies an example given a decision tree whose root is root.
         """
         global PLUS
         global MINUS
-        ## YOUR CODE HERE
-        pass
         
-        
+        if root.get_label() == PLUS: return PLUS
+        if root.get_label() == MINUS: return MINUS
+
+        split_val = example[root.get_label()]
+        return bin_id3.predict(root.get_child(split_val), example)
