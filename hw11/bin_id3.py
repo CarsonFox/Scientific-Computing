@@ -7,8 +7,8 @@ from attr import attr
 ##################################################
 # module: bin_id3.py
 # description: Binary ID3 decision tree learning
-# YOUR NAME
-# YOUR A#
+# Carson Fox
+# A02251670
 # bugs to vladimir kulyukin on canvas
 ###################################################
 
