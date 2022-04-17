@@ -172,6 +172,8 @@ class bin_id3(object):
         """
         Computes the proportion of examples whose attribute attrib has the value val.
         """
+        if len(examples) == 0:
+            return 0
         return len(bin_id3.find_examples_given_attrib_val(examples, attrib, val)) / len(
             examples
         )
@@ -241,8 +243,8 @@ class bin_id3(object):
         posExamples = bin_id3.find_examples_given_attrib_val(
             examples, target_attrib, PLUS
         )
-        if len(examples) == 0 or len(posExamples) == len(examples):
-            return id3_node(MINUS)
+        if len(posExamples) == len(examples):
+            return id3_node(PLUS)
 
         negExamples = bin_id3.find_examples_given_attrib_val(
             examples, target_attrib, MINUS
@@ -250,7 +252,7 @@ class bin_id3(object):
         if len(negExamples) == len(examples):
             return id3_node(MINUS)
 
-        #Don't count target attribute
+        # Don't count target attribute
         if len(attribs) == 1:
             return id3_node(
                 bin_id3.find_most_common_attrib_val(examples, target_attrib, avt)[0]
@@ -270,7 +272,7 @@ class bin_id3(object):
 
             if len(split) == 0:
                 child = id3_node(
-                    bin_id3.find_most_common_attrib_val(split, target_attrib, avt)[0]
+                    bin_id3.find_most_common_attrib_val(examples, target_attrib, avt)[0]
                 )
             else:
                 child = bin_id3.fit(
@@ -287,9 +289,11 @@ class bin_id3(object):
         """
         global PLUS
         global MINUS
-        
-        if root.get_label() == PLUS: return PLUS
-        if root.get_label() == MINUS: return MINUS
+
+        if root.get_label() == PLUS:
+            return PLUS
+        if root.get_label() == MINUS:
+            return MINUS
 
         split_val = example[root.get_label()]
         return bin_id3.predict(root.get_child(split_val), example)
