@@ -52,3 +52,24 @@ class HuffmanTreeNode(object):
 
     def isLeaf(self):
         return self.__rightChild is None and self.__leftChild is None
+
+    def encodeSymbol(self, s):
+        if self.isLeaf():
+            assert s in self.getSymbols()
+            return ""
+
+        if s in self.getLeftChild().getSymbols():
+            return "0" + self.getLeftChild().encodeSymbol(s)
+        else:
+            return "1" + self.getRightChild().encodeSymbol(s)
+
+    def decode(self, bin_string):
+        if self.isLeaf():
+            sym, *_ = self.getSymbols()
+            return sym, bin_string
+        else:
+            bit, rest = bin_string[0], bin_string[1:]
+            if bit == "0":
+                return self.getLeftChild().decode(rest)
+            else:
+                return self.getRightChild().decode(rest)

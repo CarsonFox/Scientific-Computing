@@ -8,6 +8,7 @@
 ################################################
 
 from heapq import heapify, heappop, heappush
+from itertools import accumulate
 
 from HuffmanTreeNode import HuffmanTreeNode
 
@@ -16,23 +17,27 @@ class HuffmanTree(object):
     def __init__(self, root=None):
         self.__root = root
 
-    def getRoot(self):
+    def getRoot(self) -> HuffmanTreeNode:
         return self.__root
 
     def encodeSymbol(self, s):
         if not s in self.__root.getSymbols():
             raise Exception("Unknown symbol")
         else:
-            ## your code here
-            pass
+            return self.__root.encodeSymbol(s)
 
     def encodeText(self, txt):
-        ## your code here
-        pass
+        return "".join(self.getRoot().encodeSymbol(sym) for sym in txt)
 
     def decode(self, bin_string):
-        ## your code here
-        pass
+        def aux():
+            char, rest = self.__root.decode(bin_string)
+            yield char
+            while len(rest) > 0:
+                char, rest = self.__root.decode(rest)
+                yield char
+
+        return "".join(aux())
 
     @staticmethod
     def mergeTwoNodes(htn1, htn2):
