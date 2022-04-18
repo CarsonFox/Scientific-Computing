@@ -1,15 +1,15 @@
-
 ################################################
 ## module: HuffmanTree.py
 ## description: A Huffman Tree Class
-## YOUR NAME
-## YOUR A#
+## Carson Fox
+## A02251670
 ##
 ## bugs to vladimir kulyukin in canvas
 ################################################
 
 from HuffmanTreeNode import HuffmanTreeNode
-    
+
+
 class HuffmanTree(object):
     def __init__(self, root=None):
         self.__root = root
@@ -19,7 +19,7 @@ class HuffmanTree(object):
 
     def encodeSymbol(self, s):
         if not s in self.__root.getSymbols():
-            raise Exception('Unknown symbol')
+            raise Exception("Unknown symbol")
         else:
             ## your code here
             pass
@@ -27,11 +27,11 @@ class HuffmanTree(object):
     def encodeText(self, txt):
         ## your code here
         pass
-     
+
     def decode(self, bin_string):
         ## your code here
         pass
-    
+
     @staticmethod
     def mergeTwoNodes(htn1, htn2):
         symbols = set(htn1.getSymbols())
@@ -46,13 +46,13 @@ class HuffmanTree(object):
     def displayHuffmanTreeNode(ht_node, tabs):
         if ht_node is None:
             return
-        print(tabs + '{}:{}'.format(ht_node.getSymbols(), ht_node.getWeight()))
-        HuffmanTree.displayHuffmanTreeNode(ht_node.getLeftChild(), tabs+'\t')
-        HuffmanTree.displayHuffmanTreeNode(ht_node.getRightChild(), tabs+'\t')
+        print(tabs + "{}:{}".format(ht_node.getSymbols(), ht_node.getWeight()))
+        HuffmanTree.displayHuffmanTreeNode(ht_node.getLeftChild(), tabs + "\t")
+        HuffmanTree.displayHuffmanTreeNode(ht_node.getRightChild(), tabs + "\t")
 
     @staticmethod
     def displayHuffmanTree(huff_tree):
-        HuffmanTree.displayHuffmanTreeNode(huff_tree.getRoot(), '')
+        HuffmanTree.displayHuffmanTreeNode(huff_tree.getRoot(), "")
 
     @staticmethod
     def displayListOfNodes(list_of_nodes):
@@ -66,4 +66,7 @@ class HuffmanTree(object):
 
     @staticmethod
     def freqMapToListOfHuffmanTreeNodes(freq_map):
-        return [HuffmanTreeNode(symbols=set([item[0]]), weight=item[1]) for item in freq_map.items()] 
+        return [
+            HuffmanTreeNode(symbols=set([item[0]]), weight=item[1])
+            for item in freq_map.items()
+        ]
