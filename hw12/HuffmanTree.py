@@ -7,6 +7,8 @@
 ## bugs to vladimir kulyukin in canvas
 ################################################
 
+from heapq import heapify, heappop, heappush
+
 from HuffmanTreeNode import HuffmanTreeNode
 
 
@@ -61,8 +63,13 @@ class HuffmanTree(object):
 
     @staticmethod
     def fromListOfHuffmanTreeNodes(list_of_nodes, dbg=False):
-        ## your code here
-        pass
+        heapify(list_of_nodes)
+
+        while len(list_of_nodes) > 1:
+            a, b = heappop(list_of_nodes), heappop(list_of_nodes)
+            heappush(list_of_nodes, HuffmanTree.mergeTwoNodes(a, b))
+
+        return HuffmanTree(list_of_nodes[0])
 
     @staticmethod
     def freqMapToListOfHuffmanTreeNodes(freq_map):

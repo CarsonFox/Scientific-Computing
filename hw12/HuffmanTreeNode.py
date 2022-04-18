@@ -47,5 +47,8 @@ class HuffmanTreeNode(object):
             and len(htn.getSymbols().difference(self.getSymbols())) == 0
         )
 
+    def __lt__(self, htn):
+        return self.__weight < htn.__weight
+
     def isLeaf(self):
         return self.__rightChild is None and self.__leftChild is None
