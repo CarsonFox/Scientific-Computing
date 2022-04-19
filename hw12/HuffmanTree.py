@@ -8,7 +8,6 @@
 ################################################
 
 from heapq import heapify, heappop, heappush
-from itertools import accumulate
 
 from HuffmanTreeNode import HuffmanTreeNode
 
