@@ -30,13 +30,12 @@ class HuffmanTree(object):
         return "".join(self.getRoot().encodeSymbol(sym) for sym in txt)
 
     def decode(self, bin_string):
-        def aux():
-            rest = bin_string
+        def symbols(rest):
             while len(rest) > 0:
                 char, rest = self.__root.decode(rest)
                 yield char
 
-        return "".join(aux())
+        return "".join(symbols(bin_string))
 
     @staticmethod
     def mergeTwoNodes(htn1, htn2):
