@@ -31,8 +31,7 @@ class HuffmanTree(object):
 
     def decode(self, bin_string):
         def aux():
-            char, rest = self.__root.decode(bin_string)
-            yield char
+            rest = bin_string
             while len(rest) > 0:
                 char, rest = self.__root.decode(rest)
                 yield char
