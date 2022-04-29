@@ -31,8 +31,8 @@ class HuffmanTree(object):
     def decode(self, bin_string):
         def symbols(rest):
             while len(rest) > 0:
-                char, rest = self.__root.decode(rest)
-                yield char
+                sym, rest = self.__root.decode(rest)
+                yield sym
 
         return "".join(symbols(bin_string))
 
