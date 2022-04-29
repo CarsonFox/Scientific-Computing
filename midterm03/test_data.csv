@@ -1,0 +1,30 @@
+Number,	 SepLen,	 SepWid,	 PetLen,	 PetWid,	 Class
+0,	 SepLen0,	 SepWid0,	 PetLen0,	 PetWid0,	 Yes
+1,	 SepLen0,	 SepWid2,	 PetLen0,	 PetWid0,	 Yes
+2,	 SepLen0,	 SepWid3,	 PetLen0,	 PetWid1,	 Yes
+3,	 SepLen1,	 SepWid3,	 PetLen0,	 PetWid0,	 Yes
+4,	 SepLen0,	 SepWid2,	 PetLen0,	 PetWid0,	 Yes
+5,	 SepLen1,	 SepWid3,	 PetLen0,	 PetWid0,	 Yes
+6,	 SepLen0,	 SepWid2,	 PetLen0,	 PetWid0,	 Yes
+7,	 SepLen1,	 SepWid3,	 PetLen0,	 PetWid0,	 Yes
+8,	 SepLen0,	 SepWid2,	 PetLen0,	 PetWid0,	 Yes
+9,	 SepLen2,	 SepWid2,	 PetLen3,	 PetWid2,	 No
+10,	 SepLen2,	 SepWid1,	 PetLen2,	 PetWid2,	 No
+11,	 SepLen0,	 SepWid0,	 PetLen1,	 PetWid1,	 No
+12,	 SepLen1,	 SepWid1,	 PetLen2,	 PetWid2,	 No
+13,	 SepLen1,	 SepWid2,	 PetLen2,	 PetWid2,	 No
+14,	 SepLen1,	 SepWid1,	 PetLen2,	 PetWid2,	 No
+15,	 SepLen2,	 SepWid1,	 PetLen2,	 PetWid2,	 No
+16,	 SepLen1,	 SepWid1,	 PetLen1,	 PetWid2,	 No
+17,	 SepLen1,	 SepWid1,	 PetLen2,	 PetWid2,	 No
+18,	 SepLen3,	 SepWid2,	 PetLen3,	 PetWid4,	 No
+19,	 SepLen2,	 SepWid1,	 PetLen3,	 PetWid3,	 No
+20,	 SepLen3,	 SepWid2,	 PetLen4,	 PetWid4,	 No
+21,	 SepLen3,	 SepWid2,	 PetLen3,	 PetWid4,	 No
+22,	 SepLen3,	 SepWid2,	 PetLen3,	 PetWid4,	 No
+23,	 SepLen2,	 SepWid1,	 PetLen3,	 PetWid3,	 No
+24,	 SepLen3,	 SepWid2,	 PetLen3,	 PetWid3,	 No
+25,	 SepLen2,	 SepWid2,	 PetLen3,	 PetWid4,	 No
+26,	 SepLen2,	 SepWid2,	 PetLen3,	 PetWid3,	 No
+
+
