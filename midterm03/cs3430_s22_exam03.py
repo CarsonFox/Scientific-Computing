@@ -8,11 +8,13 @@
 import math
 import numpy as np
 from math import prod
+from statistics import mean
 
 # YOUR IMPORTS
 
 from cs3430_s22_hw09 import solve_cong, mult_inv_mod_n, make_equiv_class_mod_n
 from prng import prng
+from bin_id3 import bin_id3, id3_node
 
 # ========= Problem 1 ========================
 
@@ -85,13 +87,20 @@ d)
 
 
 def learn_bin_id3_dt_from_csv_file(csv_fp, target_attrib):
-    # your code here
-    pass
+    examples, attribs = bin_id3.parse_csv_file_into_examples(csv_fp)
+    avt = bin_id3.construct_attrib_values_from_examples(examples, attribs)
+    return bin_id3.fit(examples, target_attrib, set(attribs), avt, False)
 
 
-def classify_csv_file_with_bin_id3_dt(dt_root, csv_fp, target_attrib):
-    # your code here
-    pass
+def display_bin_id3_node(node):
+    bin_id3.display_id3_node(node)
+
+
+def classify_csv_file_with_bin_id3_dt(dt_root: id3_node, csv_fp, target_attrib):
+    examples, _ = bin_id3.parse_csv_file_into_examples(csv_fp)
+    predictions = (bin_id3.predict(dt_root, e) for e in examples)
+
+    return mean(p == e[target_attrib] for p, e in zip(predictions, examples))
 
 # ========= Problem 10 ========================
 
@@ -118,9 +127,10 @@ Type your solution here.
 
 '''
 
-def display_bin_id3_node():
-    pass
+
 def build_huffman_tree_from_text():
     pass
+
+
 def encode_moby_dick_ch03():
     pass

@@ -574,21 +574,21 @@ class cs3430_s22_exam03_uts(unittest.TestCase):
 
     # # ================== Problem 09 =====================
 
-    # def test_prob09_exam03_ut01(self):
-    #     print('\n******** Exam 03: Problem 09: UT 01...')
-    #     dt_root = learn_bin_id3_dt_from_csv_file('train_data.csv', 'Class')
-    #     assert not dt_root is None
-    #     display_bin_id3_node(dt_root)
-    #     print('\n******** Exam03: Problem 09: UT 01 passed...')
+    def test_prob09_exam03_ut01(self):
+        print('\n******** Exam 03: Problem 09: UT 01...')
+        dt_root = learn_bin_id3_dt_from_csv_file('train_data.csv', 'Class')
+        assert not dt_root is None
+        display_bin_id3_node(dt_root)
+        print('\n******** Exam03: Problem 09: UT 01 passed...')
 
-    # def test_prob09_exam03_ut02(self):
-    #     print('\n********Exam03: Problem 09: UT 02...')
-    #     dt_root = learn_bin_id3_dt_from_csv_file('train_data.csv', 'Class')
-    #     acc = classify_csv_file_with_bin_id3_dt(
-    #         dt_root, 'test_data.csv', 'Class')
-    #     print('classification accuracy = {}'.format(acc))
-    #     assert acc >= 0.95
-    #     print('\n********Exam03: Problem 09: UT 02 passed...')
+    def test_prob09_exam03_ut02(self):
+        print('\n********Exam03: Problem 09: UT 02...')
+        dt_root = learn_bin_id3_dt_from_csv_file('train_data.csv', 'Class')
+        acc = classify_csv_file_with_bin_id3_dt(
+            dt_root, 'test_data.csv', 'Class')
+        print('classification accuracy = {}'.format(acc))
+        assert acc >= 0.95
+        print('\n********Exam03: Problem 09: UT 02 passed...')
 
     # # ================== Problem 10 =====================
 
