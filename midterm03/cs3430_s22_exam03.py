@@ -11,7 +11,7 @@ from math import prod
 
 # YOUR IMPORTS
 
-from cs3430_s22_hw09 import xeuc, mult_inv_mod_n, make_equiv_class_mod_n
+from cs3430_s22_hw09 import solve_cong, mult_inv_mod_n, make_equiv_class_mod_n
 
 # ========= Problem 1 ========================
 
@@ -36,8 +36,7 @@ def solve_cong_system_with_crt(mvals, avals):
 
 
 def solve_cong_with_xeuc(a, b, m):
-    # your code here
-    pass
+    return solve_cong(a, b, m)
 
 # ========= Problem 4 ========================
 
