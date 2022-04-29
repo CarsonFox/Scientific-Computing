@@ -12,6 +12,7 @@ from math import prod
 # YOUR IMPORTS
 
 from cs3430_s22_hw09 import solve_cong, mult_inv_mod_n, make_equiv_class_mod_n
+from prng import prng
 
 # ========= Problem 1 ========================
 
@@ -36,14 +37,13 @@ def solve_cong_system_with_crt(mvals, avals):
 
 
 def solve_cong_with_xeuc(a, b, m):
-    return solve_cong(a, b, m)
+    return solve_cong(a, b, m, tmax=1)[0]
 
 # ========= Problem 4 ========================
 
 
 def rand_lcg(a, b, m, n, x0=0):
-    # your code here
-    pass
+    return prng.lcg(a, b, m, n, x0=x0)
 
 # ========= Problem 5 ========================
 
@@ -119,3 +119,10 @@ def encode_moby_dick_ch03():
 Type your solution here.
 
 '''
+
+def display_bin_id3_node():
+    pass
+def build_huffman_tree_from_text():
+    pass
+def encode_moby_dick_ch03():
+    pass
