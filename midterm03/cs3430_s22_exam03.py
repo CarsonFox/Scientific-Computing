@@ -49,15 +49,13 @@ def rand_lcg(a, b, m, n, x0=0):
 
 
 def rand_xorshift(a, b, c, n, x0=1):
-    # your code here
-    pass
+    return prng.xorshift(a, b, c, n, x0=x0)
 
 # ========= Problem 6 ========================
 
 
 def equidistrib_test(seq, n, lower_bound, upper_bound):
-    # your code here
-    pass
+    return prng.equidistrib_test(seq, n, lower_bound, upper_bound)
 
 # ========= Problem 7 ========================
 

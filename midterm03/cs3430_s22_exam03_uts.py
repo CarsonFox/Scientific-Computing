@@ -57,268 +57,268 @@ class cs3430_s22_exam03_uts(unittest.TestCase):
 
     # =============== Problem 2 ================================
 
-    def test_prob02_exam03_ut01(self, num_tests=10):
-        print('\n********Exam03: Problem 2: UT 01...')
-        m_ary = [3, 5, 7]
-        a_ary = [2, 3, 2]
-        eq_class = solve_cong_system_with_crt(m_ary, a_ary)
-        for nt in range(num_tests):
-            print('\ntest {} ...'.format(nt))
-            x = next(eq_class)
-            print('x = {}'.format(x))
-            assert self.__is_in_equiv_class(x, 23, 105)
-            for a_i, m_i in zip(a_ary, m_ary):
-                assert (x - a_i) % m_i == 0
-                print('{} <> {} (mod {})'.format(x, a_i, m_i))
-        print('\n********Exam03: Problem 2: UT 01 passed...')
+    # def test_prob02_exam03_ut01(self, num_tests=10):
+    #     print('\n********Exam03: Problem 2: UT 01...')
+    #     m_ary = [3, 5, 7]
+    #     a_ary = [2, 3, 2]
+    #     eq_class = solve_cong_system_with_crt(m_ary, a_ary)
+    #     for nt in range(num_tests):
+    #         print('\ntest {} ...'.format(nt))
+    #         x = next(eq_class)
+    #         print('x = {}'.format(x))
+    #         assert self.__is_in_equiv_class(x, 23, 105)
+    #         for a_i, m_i in zip(a_ary, m_ary):
+    #             assert (x - a_i) % m_i == 0
+    #             print('{} <> {} (mod {})'.format(x, a_i, m_i))
+    #     print('\n********Exam03: Problem 2: UT 01 passed...')
 
-    def test_prob02_exam03_ut02(self, num_tests=10):
-        print('\n********Exam03: Problem 2: UT 02...')
-        m_ary = [3, 4, 5]
-        a_ary = [1, 1, 2]
-        eq_class = solve_cong_system_with_crt(m_ary, a_ary)
-        for nt in range(num_tests):
-            print('\ntest {} ...'.format(nt))
-            x = next(eq_class)
-            print('x = {}'.format(x))
-            assert self.__is_in_equiv_class(x, 37, 60)
-            for a_i, m_i in zip(a_ary, m_ary):
-                assert (x - a_i) % m_i == 0
-                print('{} <> {} (mod {})'.format(x, a_i, m_i))
-        print('\n********Exam03: Problem 2: UT 02 passed...')
+    # def test_prob02_exam03_ut02(self, num_tests=10):
+    #     print('\n********Exam03: Problem 2: UT 02...')
+    #     m_ary = [3, 4, 5]
+    #     a_ary = [1, 1, 2]
+    #     eq_class = solve_cong_system_with_crt(m_ary, a_ary)
+    #     for nt in range(num_tests):
+    #         print('\ntest {} ...'.format(nt))
+    #         x = next(eq_class)
+    #         print('x = {}'.format(x))
+    #         assert self.__is_in_equiv_class(x, 37, 60)
+    #         for a_i, m_i in zip(a_ary, m_ary):
+    #             assert (x - a_i) % m_i == 0
+    #             print('{} <> {} (mod {})'.format(x, a_i, m_i))
+    #     print('\n********Exam03: Problem 2: UT 02 passed...')
 
-    def test_prob02_exam03_ut03(self, num_tests=10):
-        print('\n********Exam03: Problem 2: UT 03...')
-        m_ary = [3, 4, 5]
-        a_ary = [2, 1, 2]
-        eq_class = solve_cong_system_with_crt(m_ary, a_ary)
-        for nt in range(num_tests):
-            print('\ntest {} ...'.format(nt))
-            x = next(eq_class)
-            print('x = {}'.format(x))
-            assert self.__is_in_equiv_class(x, 17, 60)
-            for a_i, m_i in zip(a_ary, m_ary):
-                assert (x - a_i) % m_i == 0
-                print('{} <> {} (mod {})'.format(x, a_i, m_i))
-        print('\n********Exam03: Problem 2: UT 03 passed...')
+    # def test_prob02_exam03_ut03(self, num_tests=10):
+    #     print('\n********Exam03: Problem 2: UT 03...')
+    #     m_ary = [3, 4, 5]
+    #     a_ary = [2, 1, 2]
+    #     eq_class = solve_cong_system_with_crt(m_ary, a_ary)
+    #     for nt in range(num_tests):
+    #         print('\ntest {} ...'.format(nt))
+    #         x = next(eq_class)
+    #         print('x = {}'.format(x))
+    #         assert self.__is_in_equiv_class(x, 17, 60)
+    #         for a_i, m_i in zip(a_ary, m_ary):
+    #             assert (x - a_i) % m_i == 0
+    #             print('{} <> {} (mod {})'.format(x, a_i, m_i))
+    #     print('\n********Exam03: Problem 2: UT 03 passed...')
 
-    def test_prob02_exam03_ut04(self, num_tests=100):
-        print('\n********Exam03: Problem 2: UT 04...')
-        m_ary = [3*3, 41*41*41, 17*17*17*17, 5*5, 7*7*7]
-        lwr, uppr = 1, 100000000000
-        for nt in range(num_tests):
-            a_ary = []
-            for _ in range(len(m_ary)):
-                a = random.randint(lwr, uppr)
-                sign = random.randint(0, 1)
-                if sign == 0:
-                    a *= -1
-                a_ary.append(a)
-            eq_class = solve_cong_system_with_crt(m_ary, a_ary)
-            print('\ntest {} ...'.format(nt))
-            x = next(eq_class)
-            for a_i, m_i in zip(a_ary, m_ary):
-                assert (x - a_i) % m_i == 0
-                print('{} <> {} (mod {})'.format(x, a_i, m_i))
-        print('\n********Exam03: Problem 2: UT 04 passed...')
+    # def test_prob02_exam03_ut04(self, num_tests=100):
+    #     print('\n********Exam03: Problem 2: UT 04...')
+    #     m_ary = [3*3, 41*41*41, 17*17*17*17, 5*5, 7*7*7]
+    #     lwr, uppr = 1, 100000000000
+    #     for nt in range(num_tests):
+    #         a_ary = []
+    #         for _ in range(len(m_ary)):
+    #             a = random.randint(lwr, uppr)
+    #             sign = random.randint(0, 1)
+    #             if sign == 0:
+    #                 a *= -1
+    #             a_ary.append(a)
+    #         eq_class = solve_cong_system_with_crt(m_ary, a_ary)
+    #         print('\ntest {} ...'.format(nt))
+    #         x = next(eq_class)
+    #         for a_i, m_i in zip(a_ary, m_ary):
+    #             assert (x - a_i) % m_i == 0
+    #             print('{} <> {} (mod {})'.format(x, a_i, m_i))
+    #     print('\n********Exam03: Problem 2: UT 04 passed...')
 
-    def test_prob02_exam03_ut05(self, num_tests=100):
-        print('\n********Exam03: Problem 2: UT 05...')
-        m_ary = [13*13, 41*41*41, 17*17*17*17, 5*5, 11*11]
-        lwr, uppr = 1, 100000000000000000000000000000000
-        for nt in range(num_tests):
-            a_ary = []
-            for _ in range(len(m_ary)):
-                a = random.randint(lwr, uppr)
-                sign = random.randint(0, 1)
-                if sign == 0:
-                    a *= -1
-                a_ary.append(a)
-            eq_class = solve_cong_system_with_crt(m_ary, a_ary)
-            print('\ntest {} ...'.format(nt))
-            x = next(eq_class)
-            for a_i, m_i in zip(a_ary, m_ary):
-                assert (x - a_i) % m_i == 0
-                print('{} <> {} (mod {})'.format(x, a_i, m_i))
-        print('\n********Exam03: Problem 2: UT 05 passed...')
+    # def test_prob02_exam03_ut05(self, num_tests=100):
+    #     print('\n********Exam03: Problem 2: UT 05...')
+    #     m_ary = [13*13, 41*41*41, 17*17*17*17, 5*5, 11*11]
+    #     lwr, uppr = 1, 100000000000000000000000000000000
+    #     for nt in range(num_tests):
+    #         a_ary = []
+    #         for _ in range(len(m_ary)):
+    #             a = random.randint(lwr, uppr)
+    #             sign = random.randint(0, 1)
+    #             if sign == 0:
+    #                 a *= -1
+    #             a_ary.append(a)
+    #         eq_class = solve_cong_system_with_crt(m_ary, a_ary)
+    #         print('\ntest {} ...'.format(nt))
+    #         x = next(eq_class)
+    #         for a_i, m_i in zip(a_ary, m_ary):
+    #             assert (x - a_i) % m_i == 0
+    #             print('{} <> {} (mod {})'.format(x, a_i, m_i))
+    #     print('\n********Exam03: Problem 2: UT 05 passed...')
 
-    # =============== Problem 3 ================================
+    # # =============== Problem 3 ================================
 
-    def test_prob03_exam03_ut01(self, num_tests=100):
-        print('\n********Exam03: Problem 3: UT 01...')
-        a, b, m = 222, 50, 253
-        eq_class = solve_cong_with_xeuc(a, b, m)
-        for nt in range(num_tests):
-            print('\ntest {} ...'.format(nt))
-            x = next(eq_class)
-            assert (a*x - b) % m == 0
-            print('{}*{} <> {} (mod {})'.format(a, x, b, m))
-        print('\n********Exam03: Problem 3: UT 01 passed...')
+    # def test_prob03_exam03_ut01(self, num_tests=100):
+    #     print('\n********Exam03: Problem 3: UT 01...')
+    #     a, b, m = 222, 50, 253
+    #     eq_class = solve_cong_with_xeuc(a, b, m)
+    #     for nt in range(num_tests):
+    #         print('\ntest {} ...'.format(nt))
+    #         x = next(eq_class)
+    #         assert (a*x - b) % m == 0
+    #         print('{}*{} <> {} (mod {})'.format(a, x, b, m))
+    #     print('\n********Exam03: Problem 3: UT 01 passed...')
 
-    def test_prob03_exam03_ut02(self, num_tests=100):
-        print('\n********Exam03: Problem 3: UT 02...')
-        a, b, m = 8706, 7788, 3125
-        eq_class = solve_cong_with_xeuc(a, b, m)
-        for nt in range(num_tests):
-            print('\ntest {} ...'.format(nt))
-            x = next(eq_class)
-            assert (a*x - b) % m == 0
-            print('{}*{} <> {} (mod {})'.format(a, x, b, m))
-        print('\n********Exam03: Problem 3: UT 02 passed...')
+    # def test_prob03_exam03_ut02(self, num_tests=100):
+    #     print('\n********Exam03: Problem 3: UT 02...')
+    #     a, b, m = 8706, 7788, 3125
+    #     eq_class = solve_cong_with_xeuc(a, b, m)
+    #     for nt in range(num_tests):
+    #         print('\ntest {} ...'.format(nt))
+    #         x = next(eq_class)
+    #         assert (a*x - b) % m == 0
+    #         print('{}*{} <> {} (mod {})'.format(a, x, b, m))
+    #     print('\n********Exam03: Problem 3: UT 02 passed...')
 
-    def test_prob03_exam03_ut03(self, num_tests=100):
-        print('\n********Exam03: Problem 3: UT 03...')
-        a, b, m = 9412, 3774, 5890
-        eq_class = solve_cong_with_xeuc(a, b, m)
-        for nt in range(num_tests):
-            print('\ntest {} ...'.format(nt))
-            x = next(eq_class)
-            assert (a*x - b) % m == 0
-            print('{}*{} <> {} (mod {})'.format(a, x, b, m))
-        print('\n********Exam03: Problem 3: UT 03 passed...')
+    # def test_prob03_exam03_ut03(self, num_tests=100):
+    #     print('\n********Exam03: Problem 3: UT 03...')
+    #     a, b, m = 9412, 3774, 5890
+    #     eq_class = solve_cong_with_xeuc(a, b, m)
+    #     for nt in range(num_tests):
+    #         print('\ntest {} ...'.format(nt))
+    #         x = next(eq_class)
+    #         assert (a*x - b) % m == 0
+    #         print('{}*{} <> {} (mod {})'.format(a, x, b, m))
+    #     print('\n********Exam03: Problem 3: UT 03 passed...')
 
-    def test_prob03_exam03_ut04(self, num_tests=100):
-        print('\n********Exam03: Problem 3: UT 04...')
-        a, b, m = 1198, 3043, 9581
-        eq_class = solve_cong_with_xeuc(a, b, m)
-        for nt in range(num_tests):
-            print('\ntest {} ...'.format(nt))
-            x = next(eq_class)
-            assert (a*x - b) % m == 0
-            print('{}*{} <> {} (mod {})'.format(a, x, b, m))
-        print('\n********Exam03: Problem 3: UT 04 passed...')
+    # def test_prob03_exam03_ut04(self, num_tests=100):
+    #     print('\n********Exam03: Problem 3: UT 04...')
+    #     a, b, m = 1198, 3043, 9581
+    #     eq_class = solve_cong_with_xeuc(a, b, m)
+    #     for nt in range(num_tests):
+    #         print('\ntest {} ...'.format(nt))
+    #         x = next(eq_class)
+    #         assert (a*x - b) % m == 0
+    #         print('{}*{} <> {} (mod {})'.format(a, x, b, m))
+    #     print('\n********Exam03: Problem 3: UT 04 passed...')
 
-    def test_prob03_exam03_ut05(self, num_tests=100):
-        print('\n********Exam03: Problem 3: UT 05...')
-        a, b, m = 4767,	8373, 534
-        eq_class = solve_cong_with_xeuc(a, b, m)
-        for nt in range(num_tests):
-            print('\ntest {} ...'.format(nt))
-            x = next(eq_class)
-            assert (a*x - b) % m == 0
-            print('{}*{} <> {} (mod {})'.format(a, x, b, m))
-        print('\n********Exam03: Problem 3: UT 05 passed...')
+    # def test_prob03_exam03_ut05(self, num_tests=100):
+    #     print('\n********Exam03: Problem 3: UT 05...')
+    #     a, b, m = 4767,	8373, 534
+    #     eq_class = solve_cong_with_xeuc(a, b, m)
+    #     for nt in range(num_tests):
+    #         print('\ntest {} ...'.format(nt))
+    #         x = next(eq_class)
+    #         assert (a*x - b) % m == 0
+    #         print('{}*{} <> {} (mod {})'.format(a, x, b, m))
+    #     print('\n********Exam03: Problem 3: UT 05 passed...')
 
-    # # =============== Problem 4 ================================
-    # # A few students told me that they had to remove ()
-    # # in expressions like lcgg = rand_lcg(a, b, m, n, x0=seed)(),
-    # # because otherwise the python generators didn't work in
-    # # their python version. If that's the case in your version
-    # # of python remove ().
+    # # # =============== Problem 4 ================================
+    # # # A few students told me that they had to remove ()
+    # # # in expressions like lcgg = rand_lcg(a, b, m, n, x0=seed)(),
+    # # # because otherwise the python generators didn't work in
+    # # # their python version. If that's the case in your version
+    # # # of python remove ().
 
-    def test_prob04_exam03_ut01(self):
-        print('\n******** Exam 03: Problem 04: UT 01...')
-        a, b, m, n, seed = 214013, 2531011, 4294967296, 10, 1
-        lcgg = rand_lcg(a, b, m, n, x0=seed)()
-        rns = [next(lcgg) for _ in range(n)]
-        print('LCG random numbers: {}'.format(rns))
-        assert len(rns) == n
-        if self.__check_uniqueness(rns):
-            print('all random numbers are unique')
-        print('\n******** Exam 03: Problem 04: UT 01 passed...')
+    # def test_prob04_exam03_ut01(self):
+    #     print('\n******** Exam 03: Problem 04: UT 01...')
+    #     a, b, m, n, seed = 214013, 2531011, 4294967296, 10, 1
+    #     lcgg = rand_lcg(a, b, m, n, x0=seed)()
+    #     rns = [next(lcgg) for _ in range(n)]
+    #     print('LCG random numbers: {}'.format(rns))
+    #     assert len(rns) == n
+    #     if self.__check_uniqueness(rns):
+    #         print('all random numbers are unique')
+    #     print('\n******** Exam 03: Problem 04: UT 01 passed...')
 
-    def test_prob04_exam03_ut02(self):
-        print('\n******** Exam 03: Problem 04: UT 02...')
-        a, b, m, n, seed = 214013, 2531013, 4294967296, 10, 213
-        lcgg = rand_lcg(a, b, m, n, x0=seed)()
-        rns = [next(lcgg) for _ in range(n)]
-        print('LCG random numbers: {}'.format(rns))
-        assert len(rns) == n
-        if self.__check_uniqueness(rns):
-            print('all random numbers are unique')
-        print('\n******** Exam 03: Problem 04: UT 02 passed...')
+    # def test_prob04_exam03_ut02(self):
+    #     print('\n******** Exam 03: Problem 04: UT 02...')
+    #     a, b, m, n, seed = 214013, 2531013, 4294967296, 10, 213
+    #     lcgg = rand_lcg(a, b, m, n, x0=seed)()
+    #     rns = [next(lcgg) for _ in range(n)]
+    #     print('LCG random numbers: {}'.format(rns))
+    #     assert len(rns) == n
+    #     if self.__check_uniqueness(rns):
+    #         print('all random numbers are unique')
+    #     print('\n******** Exam 03: Problem 04: UT 02 passed...')
 
-    def test_prob04_exam03_ut03(self):
-        print('\n******** Exam 03: Problem 04: UT 03...')
-        a, b, m, n, seed = 214013, 2531017, 4294967296, 20, 11235
-        lcgg = rand_lcg(a, b, m, n, x0=seed)()
-        rns = [next(lcgg) for _ in range(n)]
-        print('LCG random numbers: {}'.format(rns))
-        assert len(rns) == n
-        if self.__check_uniqueness(rns):
-            print('all random numbers are unique')
-        print('\n******** Exam 03: Problem 04: UT 03 passed...')
+    # def test_prob04_exam03_ut03(self):
+    #     print('\n******** Exam 03: Problem 04: UT 03...')
+    #     a, b, m, n, seed = 214013, 2531017, 4294967296, 20, 11235
+    #     lcgg = rand_lcg(a, b, m, n, x0=seed)()
+    #     rns = [next(lcgg) for _ in range(n)]
+    #     print('LCG random numbers: {}'.format(rns))
+    #     assert len(rns) == n
+    #     if self.__check_uniqueness(rns):
+    #         print('all random numbers are unique')
+    #     print('\n******** Exam 03: Problem 04: UT 03 passed...')
 
-    def test_prob04_exam03_ut04(self):
-        print('\n******** Exam 03: Problem 04: UT 04...')
-        a, b, m, n, seed = 214017, 2531019, 4294967296, 20, 11235
-        lcgg = rand_lcg(a, b, m, n, x0=seed)()
-        rns = [next(lcgg) for _ in range(n)]
-        print('LCG random numbers: {}'.format(rns))
-        assert len(rns) == n
-        if self.__check_uniqueness(rns):
-            print('all random numbers are unique')
-        print('\n******** Exam 03: Problem 04: UT 04 passed...')
+    # def test_prob04_exam03_ut04(self):
+    #     print('\n******** Exam 03: Problem 04: UT 04...')
+    #     a, b, m, n, seed = 214017, 2531019, 4294967296, 20, 11235
+    #     lcgg = rand_lcg(a, b, m, n, x0=seed)()
+    #     rns = [next(lcgg) for _ in range(n)]
+    #     print('LCG random numbers: {}'.format(rns))
+    #     assert len(rns) == n
+    #     if self.__check_uniqueness(rns):
+    #         print('all random numbers are unique')
+    #     print('\n******** Exam 03: Problem 04: UT 04 passed...')
 
-    def test_prob04_exam03_ut05(self):
-        print('\n******** Exam 03: Problem 04: UT 05...')
-        a, b, m, n, seed = 214019, 2531017, 4294967296, 10000000, 11237
-        lcgg = rand_lcg(a, b, m, n, x0=seed)()
-        rns = [next(lcgg) for _ in range(n)]
-        assert len(rns) == n
-        if self.__check_uniqueness(rns):
-            print('all random numbers are unique')
-        print('\n******** Exam 03: Problem 04: UT 05 passed...')
+    # def test_prob04_exam03_ut05(self):
+    #     print('\n******** Exam 03: Problem 04: UT 05...')
+    #     a, b, m, n, seed = 214019, 2531017, 4294967296, 10000000, 11237
+    #     lcgg = rand_lcg(a, b, m, n, x0=seed)()
+    #     rns = [next(lcgg) for _ in range(n)]
+    #     assert len(rns) == n
+    #     if self.__check_uniqueness(rns):
+    #         print('all random numbers are unique')
+    #     print('\n******** Exam 03: Problem 04: UT 05 passed...')
 
-    def test_prob04_exam03_ut06(self):
-        print('\n******** Exam 03: Problem 04: UT 06...')
-        a, b, m, n, seed = 438293617, (2**13 + 13), 2**30, 20000000, 58132134
-        lcgg = rand_lcg(a, b, m, n, x0=seed)()
-        rns = [next(lcgg) for _ in range(n)]
-        assert len(rns) == n
-        if self.__check_uniqueness(rns):
-            print('all random numbers are unique')
-        print('\n******** Exam 03: Problem 04: UT 06 passed...')
+    # def test_prob04_exam03_ut06(self):
+    #     print('\n******** Exam 03: Problem 04: UT 06...')
+    #     a, b, m, n, seed = 438293617, (2**13 + 13), 2**30, 20000000, 58132134
+    #     lcgg = rand_lcg(a, b, m, n, x0=seed)()
+    #     rns = [next(lcgg) for _ in range(n)]
+    #     assert len(rns) == n
+    #     if self.__check_uniqueness(rns):
+    #         print('all random numbers are unique')
+    #     print('\n******** Exam 03: Problem 04: UT 06 passed...')
 
-    def test_prob04_exam03_ut07(self):
-        print('\n******** Exam 03: Problem 04: UT 07...')
-        a, b, m, n, seed = 12132445, (2**17 + 17), 2**36, 30000000, 11235813
-        lcgg = rand_lcg(a, b, m, n, x0=seed)()
-        rns = [next(lcgg) for _ in range(n)]
-        assert len(rns) == n
-        if self.__check_uniqueness(rns):
-            print('all random numbers are unique')
-        print('\n******** Exam 03: Problem 04: UT 07 passed...')
+    # def test_prob04_exam03_ut07(self):
+    #     print('\n******** Exam 03: Problem 04: UT 07...')
+    #     a, b, m, n, seed = 12132445, (2**17 + 17), 2**36, 30000000, 11235813
+    #     lcgg = rand_lcg(a, b, m, n, x0=seed)()
+    #     rns = [next(lcgg) for _ in range(n)]
+    #     assert len(rns) == n
+    #     if self.__check_uniqueness(rns):
+    #         print('all random numbers are unique')
+    #     print('\n******** Exam 03: Problem 04: UT 07 passed...')
 
-    def test_prob04_exam03_ut08(self):
-        print('\n******** Exam 03: Problem 04: UT 08...')
-        a, b, m, n, seed = 181465474592829, (2 **
-                                             19 + 19), 2**48, 40000000, 3581311224
-        lcgg = rand_lcg(a, b, m, n, x0=seed)()
-        rns = [next(lcgg) for _ in range(n)]
-        assert len(rns) == n
-        if self.__check_uniqueness(rns):
-            print('all random numbers are unique')
-        print('\n******** Exam 03: Problem 04: UT 08 passed...')
+    # def test_prob04_exam03_ut08(self):
+    #     print('\n******** Exam 03: Problem 04: UT 08...')
+    #     a, b, m, n, seed = 181465474592829, (2 **
+    #                                          19 + 19), 2**48, 40000000, 3581311224
+    #     lcgg = rand_lcg(a, b, m, n, x0=seed)()
+    #     rns = [next(lcgg) for _ in range(n)]
+    #     assert len(rns) == n
+    #     if self.__check_uniqueness(rns):
+    #         print('all random numbers are unique')
+    #     print('\n******** Exam 03: Problem 04: UT 08 passed...')
 
-    def test_prob04_exam03_ut09(self):
-        print('\n******** Exam 03: Problem 04: UT 09...')
-        a, b, m, n, seed = 454339144066433781, (2 **
-                                                23 + 23), 2**60, 50000000, 3582241311
-        lcgg = rand_lcg(a, b, m, n, x0=seed)()
-        rns = [next(lcgg) for _ in range(n)]
-        assert len(rns) == n
-        if self.__check_uniqueness(rns):
-            print('all random numbers are unique')
-        print('\n******** Exam 03: Problem 04: UT 09 passed...')
+    # def test_prob04_exam03_ut09(self):
+    #     print('\n******** Exam 03: Problem 04: UT 09...')
+    #     a, b, m, n, seed = 454339144066433781, (2 **
+    #                                             23 + 23), 2**60, 50000000, 3582241311
+    #     lcgg = rand_lcg(a, b, m, n, x0=seed)()
+    #     rns = [next(lcgg) for _ in range(n)]
+    #     assert len(rns) == n
+    #     if self.__check_uniqueness(rns):
+    #         print('all random numbers are unique')
+    #     print('\n******** Exam 03: Problem 04: UT 09 passed...')
 
-    def test_prob04_exam03_ut10(self):
-        print('\n******** Exam 03: Problem 04: UT 10...')
-        a, b, m, n, seed = 454339144066433783, (2 **
-                                                23 + 23), 2**60, 50000000, 3582241313
-        lcgg = rand_lcg(a, b, m, n, x0=seed)()
-        rns = [next(lcgg) for _ in range(n)]
-        assert len(rns) == n
-        if self.__check_uniqueness(rns):
-            print('all random numbers are unique')
-        print('\n******** Exam 03: Problem 04: UT 10 passed...')
+    # def test_prob04_exam03_ut10(self):
+    #     print('\n******** Exam 03: Problem 04: UT 10...')
+    #     a, b, m, n, seed = 454339144066433783, (2 **
+    #                                             23 + 23), 2**60, 50000000, 3582241313
+    #     lcgg = rand_lcg(a, b, m, n, x0=seed)()
+    #     rns = [next(lcgg) for _ in range(n)]
+    #     assert len(rns) == n
+    #     if self.__check_uniqueness(rns):
+    #         print('all random numbers are unique')
+    #     print('\n******** Exam 03: Problem 04: UT 10 passed...')
 
-    # # =============== Problem 5 ================================
-    # # A few students told me that they had to remove ()
-    # # in expressions like xsg = rand_xorshift(a, b, c, n, x0=seed)()
-    # # because otherwise the python generators didn't work in
-    # # their python version. If that's the case in your version
-    # # of python remove ().
+    # # # =============== Problem 5 ================================
+    # # # A few students told me that they had to remove ()
+    # # # in expressions like xsg = rand_xorshift(a, b, c, n, x0=seed)()
+    # # # because otherwise the python generators didn't work in
+    # # # their python version. If that's the case in your version
+    # # # of python remove ().
 
     # def test_prob05_exam03_ut01(self):
     #     print('\n******** Exam 03: Problem 05: UT 01...')
