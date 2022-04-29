@@ -7,8 +7,11 @@
 
 import math
 import numpy as np
+from math import prod
 
 # YOUR IMPORTS
+
+from cs3430_s22_hw09 import xeuc, mult_inv_mod_n, make_equiv_class_mod_n
 
 # ========= Problem 1 ========================
 
@@ -23,9 +26,11 @@ the equivalence class of 1 modulo 60.
 # ========== Problem 2 ========================
 
 
-def solve_cong_system_with_crt(m_ary, a_ary):
-    # your code here
-    pass
+def solve_cong_system_with_crt(mvals, avals):
+    m = prod(mvals)
+    bvals = (next(mult_inv_mod_n(m//mj, mj)) for mj in mvals)
+    x0 = sum(m//mj * aj * bj for mj, aj, bj in zip(mvals, avals, bvals))
+    return make_equiv_class_mod_n(x0, m)
 
 # ========== Problem 3 ========================
 
