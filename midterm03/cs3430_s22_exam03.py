@@ -68,6 +68,11 @@ def equidistrib_test(seq, n, lower_bound, upper_bound):
 '''
 Type your answer to this problem here.
 
+1. No
+2. Yes
+3. No
+4. No
+5. No
 
 '''
 
@@ -76,13 +81,13 @@ Type your answer to this problem here.
 '''
 Type your answers to this problem here.
 
-a)
+a) .97
 
-b)
+b) .72
 
-c)
+c) .32
 
-d)
+d) .17
 
 '''
 
