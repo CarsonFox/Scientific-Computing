@@ -9,12 +9,15 @@ import math
 import numpy as np
 from math import prod
 from statistics import mean
+from CharFreqMap import CharFreqMap
 
 # YOUR IMPORTS
 
 from cs3430_s22_hw09 import solve_cong, mult_inv_mod_n, make_equiv_class_mod_n
 from prng import prng
 from bin_id3 import bin_id3, id3_node
+from HuffmanTree import HuffmanTree
+from BinHuffmanTree import BinHuffmanTree
 
 # ========= Problem 1 ========================
 
@@ -100,14 +103,26 @@ def classify_csv_file_with_bin_id3_dt(dt_root: id3_node, csv_fp, target_attrib):
     examples, _ = bin_id3.parse_csv_file_into_examples(csv_fp)
     predictions = (bin_id3.predict(dt_root, e) for e in examples)
 
-    return mean(p == e[target_attrib] for p, e in zip(predictions, examples))
+    correct = sum(p == e[target_attrib] for p, e in zip(predictions, examples))
+    return correct / len(examples)
 
 # ========= Problem 10 ========================
 
 
+def computeFreqMap(txt):
+    freq_map = {}
+    for c in txt:
+        if c in freq_map:
+            freq_map[c] += 1
+        else:
+            freq_map[c] = 1
+    return freq_map
+
+
 def build_huffman_tree_from_text(txtstr):
-    # your code here
-    pass
+    freq_map = computeFreqMap(txtstr)
+    nodes = HuffmanTree.freqMapToListOfHuffmanTreeNodes(freq_map)
+    return HuffmanTree.fromListOfHuffmanTreeNodes(nodes)
 
 
 '''
@@ -116,8 +131,13 @@ Remember to state the number of saved bytes.
 
 
 def encode_moby_dick_ch03():
-    # your code here
-    pass
+    freq_map = CharFreqMap.computeCharFreqMap('moby_dick_ch03.txt')
+    nodes = HuffmanTree.freqMapToListOfHuffmanTreeNodes(freq_map)
+    tree = HuffmanTree.fromListOfHuffmanTreeNodes(nodes)
+
+    bin_tree = BinHuffmanTree(root=tree.getRoot())
+    bin_tree.encodeTextFromFileToFile(
+        'moby_dick_ch03.txt', 'moby_dick_ch03')
 
 
 # ========= Problem 11 ========================
@@ -126,11 +146,3 @@ def encode_moby_dick_ch03():
 Type your solution here.
 
 '''
-
-
-def build_huffman_tree_from_text():
-    pass
-
-
-def encode_moby_dick_ch03():
-    pass
