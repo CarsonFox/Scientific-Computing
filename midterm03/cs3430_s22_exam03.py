@@ -5,7 +5,6 @@
 # A02251670
 #####################################
 
-import math
 import numpy as np
 from math import prod
 from statistics import mean
@@ -149,5 +148,11 @@ def encode_moby_dick_ch03():
 
 '''
 Type your solution here.
+
+0   0   0   0   0
+0   20  0   0   0
+100 0   2   0   0
+0   10  0   0   0
+0   0   0   0   0
 
 '''
